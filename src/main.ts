@@ -18,7 +18,7 @@ export async function nodeHtmlToImage(options: Options) {
     puppeteer = undefined,
     isStartServer = false
   } = options;
-  let cluster: Cluster<ScreenshotParams>
+  let cluster: Cluster<ScreenshotParams> | null = null
   if (isStartServer || !cluster) {
     cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
