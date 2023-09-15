@@ -1,11 +1,11 @@
 {
-  "name": "node-html-to-image",
-  "version": "3.3.0",
-  "description": "A Node.js library that generates images from HTML",
+  "name": "node-html-to-image-server",
+  "version": "1.0.1",
+  "description": "A Node.js library that generates images from HTML.Support for using multiple HTML templates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:frinyvonnick/node-html-to-image.git",
-  "author": "FRIN Yvonnick <frin.yvonnick@gmail.com>",
+  "repository": "git@github.com:china-english/node-html-to-image.git",
+  "author": "fei",
   "license": "Apache-2.0",
   "dependencies": {
     "handlebars": "^4.5.3",

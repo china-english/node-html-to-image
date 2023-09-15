@@ -16,15 +16,20 @@ export async function nodeHtmlToImage(options: Options) {
     quality,
     puppeteerArgs = {},
     puppeteer = undefined,
+    isStartServer = false
   } = options;
-
-  const cluster: Cluster<ScreenshotParams> = await Cluster.launch({
-    concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 2,
-    puppeteerOptions: { ...puppeteerArgs, headless: true },
-    puppeteer: puppeteer,
-  });
-
+  let cluster: Cluster<ScreenshotParams>
+  if (isStartServer || !cluster) {
+    cluster = await Cluster.launch({
+        concurrency: Cluster.CONCURRENCY_CONTEXT,
+        maxConcurrency: 2,
+        puppeteerOptions: { ...puppeteerArgs, headless: true },
+        puppeteer: puppeteer,
+      });
+    if (isStartServer) {
+      return 
+    }
+  }
   const shouldBatch = Array.isArray(content);
   const contents = shouldBatch ? content : [{ ...content, output, selector }];
 
@@ -53,8 +58,8 @@ export async function nodeHtmlToImage(options: Options) {
         );
       })
     );
-    await cluster.idle();
-    await cluster.close();
+    // await cluster.idle();
+    // await cluster.close();
 
     return shouldBatch
       ? screenshots.map(({ buffer }) => buffer)
